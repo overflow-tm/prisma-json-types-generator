@@ -1,0 +1,1 @@
+{"version":3,"file":"text-changes.d.ts","sourceRoot":"","sources":["../../src/util/text-changes.ts"],"names":[],"mappings":"AAAA,yFAAyF;AACzF,MAAM,WAAW,QAAQ;IACvB,KAAK,EAAE,MAAM,CAAC;IACd,GAAG,EAAE,MAAM,CAAC;IACZ,IAAI,EAAE,MAAM,CAAC;CACd;AAED;;;;;;;GAOG;AACH,wBAAgB,gBAAgB,CAAC,OAAO,EAAE,MAAM,EAAE,OAAO,EAAE,QAAQ,EAAE,GAAG,MAAM,CA+B7E"}
