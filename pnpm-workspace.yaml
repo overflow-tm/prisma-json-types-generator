@@ -1,4 +1,8 @@
 ignoredBuiltDependencies:
   - '@prisma/engines'
   - esbuild
-  - prisma
+  - prisma# 依存パッケージの build script（postinstall 等）が未レビューのまま入ったら install を失敗させる。
+# pnpm 10 は既定で依存の build script を実行しないが、警告を出すだけで install は成功するため、
+# 新しい依存が build script を持ち込んでも気付く契機が無い（＝止まっているが CI に伝わらない）。
+# pnpm 11 ではこの設定が既定 true になる。
+strictDepBuilds: true
