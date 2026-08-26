@@ -2,3 +2,21 @@ ignoredBuiltDependencies:
   - '@prisma/engines'
   - esbuild
   - prisma
+
+# ===== サプライチェーン対策: cooldown（公開直後の版を掴まない） =====
+# 単位は「分」。1440 = 24 時間 = pnpm 11 の既定値。
+# pnpm 11 へ上げたときに挙動が変わらないよう、同じ値に揃えている。
+# 🔴 他の PM から値をコピーしない（bun は秒・bundler は日・npm は絶対日付）。
+#
+# 🔴 この設定はセキュリティリリースも止める。実測（2026-08-26 / pnpm 10.28.0・10.34.5）:
+#   - 厳密ピン（例 "next": "16.3.3"）は ERR_PNPM_NO_MATURE_MATCHING_VERSION で解決が失敗する
+#   - semver range（例 "^5.0.0"）は失敗せず、黙って古い版へ fallback する
+#     （minimumReleaseAgeStrict は pnpm 11 以降の設定。pnpm 10 では指定しても無視される）
+#   - `pnpm install --frozen-lockfile` は lockfile に違反エントリがあっても落ちない（CI は壊れない）
+#
+# 止められたら、この値を下げずに除外リストで抜ける（`pnpm audit --fix` が自動で追記する）:
+#   minimumReleaseAgeExclude:
+#     - "<パッケージ名>@<バージョン>"
+# 🔴 range で更新したときは、意図した版が実際に入ったか lockfile で確認すること
+#    （fallback が起きると「直したつもりで直っていない」状態になる）。
+minimumReleaseAge: 1440
